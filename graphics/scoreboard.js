@@ -59,14 +59,22 @@
         }
 
         const newEndTime = newScore.round.endTime;
+        var same = false;
         if (newEndTime && newEndTime !== null && newEndTime !== "") {
-            endTime = moment(newEndTime);
+            const newMomentEndTime = moment(newEndTime);
+            if (newMomentEndTime.isSame(endTime)) {
+                same = true;
+            } else {
+                endTime = moment(newEndTime);
+            }
         } else {
             endTime = null;
         }
-        window.clearInterval(timeInterval);
-        tickTimer();
-        timeInterval = window.setInterval(tickTimer, 1000);
+        if (!same) {
+            window.clearInterval(timeInterval);
+            tickTimer();
+            timeInterval = window.setInterval(tickTimer, 1000);
+        }
 
         o_roundTitle.innerHTML = newScore.round.title;
     });
