@@ -1,0 +1,50 @@
+{
+  "name": "nodecg-peachhack-scoreboard",
+  "version": "0.0.0",
+  "description": "Graphics overlay package for PeachHack Netrunner broadcasts",
+  "homepage": "http://peachhack.com",
+  "author": {
+    "name": "Ben Torell",
+    "email": "dodgepong@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "netrunner",
+    "overlay",
+    "cards",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.9.9",
+    "dashboardPanels": [
+      {
+        "name": "overlay-control",
+        "title": "Scoreboard",
+        "width": 6,
+        "file": "overlay-control.html",
+        "headerColor": "#9f9bbd"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "scoreboard.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "license": "MIT",
+  "dependencies": {
+    "autocomplete.js": "^0.30.0",
+    "bulma": "^0.7.1",
+    "font-awesome": "^4.7.0",
+    "moment": "^2.22.2"
+  }
+}

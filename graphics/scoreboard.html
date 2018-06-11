@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #scoreboard {
+            position: fixed;
+            bottom: 0;
+            background: linear-gradient(to bottom, #004a6e 0%,#000f18 100%);
+            height: 120px;
+            width: 100%;
+            box-shadow: 0px 0px 15px 5px black;
+            display: flex;
+        }
+
+        .player-box {
+            width: 660px;
+            height: 100%;
+            margin: 0;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+
+        .score-box {
+            width: 120px;
+            height: 100%;
+            margin: 0;
+            flex-grow: 1;
+            background: linear-gradient(to bottom, #5487a1 0%,#525c61 100%);
+            font-family: "Bebas Kai";
+            text-align: center;
+            font-size: 100px;
+            padding: 0px;
+            text-transform: uppercase;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0,0,0,.01) 0 0 1px;
+        }
+
+        .round-box {
+            width: 360px;
+            height: 100%;
+            margin: 0;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+
+        .player-name {
+            font-family: "Bebas Kai";
+            text-align: center;
+            font-size: 68px;
+            width: 100%;
+            height: 65px;
+            margin: 0;
+            padding: 0px 4px 4px 4px;
+            text-transform: uppercase;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0,0,0,.01) 0 0 1px;
+            overflow: hidden;
+        }
+
+        .player-identity {
+            font-family: "Rounded Elegance";
+            text-align: center;
+            font-size: 32px;
+            width: 100%;
+            height: 55px;
+            margin: 0;
+            padding: 4px;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0,0,0,.01) 0 0 1px;
+            overflow: hidden;
+        }
+
+        .round-time {
+            font-family: "Rounded Elegance";
+            text-align: center;
+            font-size: 72px;
+            width: 100%;
+            height: 65px;
+            margin: 0;
+            padding: 0px 4px 4px 4px;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0,0,0,.01) 0 0 1px;
+            overflow: hidden;
+        }
+
+        .round-title {
+            font-family: "Rounded Elegance";
+            text-align: center;
+            font-size: 32px;
+            width: 100%;
+            height: 55px;
+            margin: 0;
+            padding: 4px;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            text-shadow: rgba(0,0,0,.01) 0 0 1px;
+            overflow: hidden;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="scoreboard">
+        <div class="player-box">
+            <div id="leftPlayerName" class="player-name"></div>
+            <div id="leftPlayerID" class="player-identity"></div>
+        </div>
+        <div id="leftPlayerScore" class="score-box"></div>
+        <div class="round-box">
+            <div id="roundTime" class="round-time"></div>
+            <div id="roundTitle" class="round-title"></div>
+        </div>
+        <div id="rightPlayerScore" class="score-box"></div>
+        <div class="player-box">
+            <div id="rightPlayerName" class="player-name"></div>
+            <div id="rightPlayerID" class="player-identity"></div>
+        </div>
+    </div>
+    <script src="../node_modules/moment/moment.js"></script>
+    <script src='scoreboard.js' />
+</body>
+</html>

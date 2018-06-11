@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- <link rel="import" href="../bower_components/iron-icons/av-icons.html">
+    <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="../bower_components/iron-input/iron-input.html">
+    <link rel="import" href="../bower_components/paper-styles/color.html">
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
+    <link rel="import" href="../bower_components/paper-input/paper-input.html">
+    <link rel="import" href="../bower_components/paper-input/paper-input-container.html">
+    <link rel="import" href="../bower_components/paper-time-input/paper-time-input.html">
+    <link rel="import" href="../bower_components/neon-animation/web-animations.html"> -->
+</head>
+<body>
+        <!-- <paper-time-input id="roundEndTime" display="inline-flex" label="Round End Time" hour="10" min="00"></paper-time-input> -->
+
+    <style is="custom-style">
+        /* #container {
+            align-items: baseline;
+            @apply --layout-horizontal;
+        } */
+        /* paper-input.timeInput {
+            display: inline-block
+        }
+
+        paper-button.indigo {
+            background-color: var(--paper-indigo-500);
+            color: white;
+            --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+            };
+        }
+        paper-button.indigo:hover {
+            background-color: var(--paper-indigo-400);
+        } */
+        .score {
+            text-align: center;
+        }
+
+        .time {
+            width: 50px;
+        }
+
+
+        .algolia-autocomplete {
+            width: 100%;
+        }
+        .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+            width: 100%;
+        }
+        .algolia-autocomplete .aa-hint {
+            color: #999;
+        }
+        .algolia-autocomplete .aa-dropdown-menu {
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #999;
+            border-top: none;
+        }
+        .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+            cursor: pointer;
+            padding: 5px 4px;
+        }
+        .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+            background-color: #B2D7FF;
+        }
+        .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
+    <!-- <div class="container">
+        <paper-input class="timeInput" id="roundEndHour" maxlength="2" size="2" label="HH"></paper-input>
+        :
+        <paper-input class="timeInput" id="roundEndMinute" maxlength="2" size="2" label="MM"></paper-input>
+        :
+        <paper-input class="timeInput" id="roundEndSecond" maxlength="2" size="2" label="SS"></paper-input>
+    </div> -->
+    <!-- <paper-button id="start" class="indigo" raised>
+        <iron-icon icon="av:play-arrow"></iron-icon>
+    </paper-button>
+    <paper-button id="stop" raised>
+        <iron-icon icon="av:stop"></iron-icon>
+    </paper-button> -->
+    <!-- <paper-button raised id="set65" class="indigo">
+        Set +65 min from now
+    </paper-button>
+    <paper-button raised id="clear">
+        Clear
+    </paper-button>
+    <paper-button raised id="clear">
+        Clear
+    </paper-button> -->
+    <form onsubmit="return false;">
+        <div class="columns">
+            <div class="column">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" tabindex="1" type="text" id="leftPlayerName" placeholder="Left Player Name" />
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input is-info" tabindex="2" type="text" id="leftPlayerCorp" placeholder="Left Player Corp" />
+                        <div id="leftPlayerCorpAutocomplete" ></div>
+                    </div>
+                    <div class="control">
+                        <button class="button" id="leftPlayerTakeCorp">
+                            <span class="icon is-small">
+                                <i class="fas fa-caret-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input class="input is-danger" tabindex="3" type="text" id="leftPlayerRunner" placeholder="Left Player Runner" />
+                        <div id="leftPlayerRunnerAutocomplete" ></div>
+                    </div>
+                    <div class="control">
+                        <button class="button" id="leftPlayerTakeRunner">
+                            <span class="icon is-small">
+                                <i class="fas fa-caret-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="field has-addons has-addons-centered">
+                    <div class="control">
+                        <button class="button is-info score-button" id="leftScoreMinus">
+                            <span class="icon is-small">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <input class="input score" type="text" id="leftPlayerScore" placeholder="Left Player Score" />
+                    </div>
+                    <div class="control">
+                        <button class="button is-info score-button" id="leftScorePlus">
+                            <span class="icon is-small">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <input class="input" tabindex="7" type="text" id="roundTitle" placeholder="Round Name" />
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" tabindex="4" type="text" id="rightPlayerName" placeholder="Right Player Name" />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-info" tabindex="5" type="text" id="rightPlayerCorp" placeholder="Right Player Corp" />
+                        <div id="rightPlayerCorpAutocomplete" ></div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-danger" tabindex="6" type="text" id="rightPlayerRunner" placeholder="Right Player Runner" />
+                        <div id="rightPlayerRunnerAutocomplete" ></div>
+                    </div>
+                </div>
+                <div class="field has-addons has-addons-centered">
+                    <div class="control">
+                        <button class="button is-info score-button" id="rightScoreMinus">
+                            <span class="icon is-small">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <input class="input score" type="text" id="rightPlayerScore" placeholder="Right Player Score" />
+                    </div>
+                    <div class="control">
+                        <button class="button is-info score-button" id="rightScorePlus">
+                            <span class="icon is-small">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="input time" type="text" id="endHour" placeholder="HH" />
+                    </div>
+                    <div class="control">
+                        <input class="input time" type="text" id="endMinute" placeholder="MM" />
+                    </div>
+                    <div class="control">
+                        <input class="input time" type="text" id="endSecond" placeholder="SS" />
+                    </div>
+                    <div class="control">
+                        <button class="button is-success" id="add65Min" accesskey="s">+65</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-info" id="clearTime" accesskey="s">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="leftPlayerRunning" />
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary" id="update" accesskey="s">Update</button>
+            </div>
+            <div class="control">
+                <button class="button is-info" id="switchSides">Switch Sides</button>
+            </div>
+            <div class="control">
+                <button class="button is-danger" id="resetScores">Reset Scores</button>
+            </div>
+            <div class="control">
+                <button class="button" id="undoChanges">Undo Changes</button>
+            </div>
+        </div>
+    </form>
+    <script src="../node_modules/moment/moment.js"></script>
+    <script src="../node_modules/autocomplete.js/dist/autocomplete.js"></script>
+    <script src="overlay-control.js"></script>
+</body>
+</html>
