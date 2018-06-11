@@ -196,7 +196,6 @@
 		}
 	];
 
-
 	const runners = [
 		{
 			searchString: '419',
@@ -412,9 +411,7 @@
 		i_rightPlayerScore.value = 0;
 	}
 
-	function switchSides() {
-		resetScores();
-
+	function toggleLeftPlayerRunning() {
 		const i_leftPlayerRunning = document.getElementById('leftPlayerRunning');
 
 		if (i_leftPlayerRunning.value === '1') {
@@ -422,6 +419,11 @@
 		} else {
 			setLeftPlayerRunning(1);
 		}
+	}
+
+	function switchSides() {
+		resetScores();
+		toggleLeftPlayerRunning();
 	}
 
 	function setEndTime(newTime) {
@@ -466,6 +468,7 @@
 
 	const b_update = document.getElementById('update');
 	const b_switchSides = document.getElementById('switchSides');
+	const b_swapPlayerPositions = document.getElementById('swapPlayerPositions');
 	const b_resetScores = document.getElementById('resetScores');
 	const b_undoChanges = document.getElementById('undoChanges');
 
@@ -489,9 +492,6 @@
 	const b_rightScoreMinus = document.getElementById('rightScoreMinus');
 	const b_rightScorePlus = document.getElementById('rightScorePlus');
 
-	const i_endHour = document.getElementById('endHour');
-	const i_endMinute = document.getElementById('endMinute');
-	const i_endSecond = document.getElementById('endSecond');
 	const b_add65Min = document.getElementById('add65Min');
 	const b_clearTime = document.getElementById('clearTime');
 
@@ -540,6 +540,25 @@
 
 	b_switchSides.addEventListener('click', () => {
 		switchSides();
+	});
+
+	b_swapPlayerPositions.addEventListener('click', () => {
+		var tempLeftName = i_leftPlayerName.value;
+		var tempLeftRunner = i_leftPlayerRunner.value;
+		var tempLeftCorp = i_leftPlayerCorp.value;
+		var tempLeftScore = i_leftPlayerScore.value;
+
+		i_leftPlayerName.value = i_rightPlayerName.value;
+		i_leftPlayerRunner.value = i_rightPlayerRunner.value;
+		i_leftPlayerCorp.value = i_rightPlayerCorp.value;
+		i_leftPlayerScore.value = i_rightPlayerScore.value;
+
+		i_rightPlayerName.value = tempLeftName;
+		i_rightPlayerRunner.value = tempLeftRunner;
+		i_rightPlayerCorp.value = tempLeftCorp;
+		i_rightPlayerScore.value = tempLeftScore;
+
+		toggleLeftPlayerRunning();
 	});
 
 	b_resetScores.addEventListener('click', () => {

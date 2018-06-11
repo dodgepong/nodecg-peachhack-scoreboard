@@ -216,16 +216,44 @@
         <input type="hidden" id="leftPlayerRunning" />
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-primary" id="update" accesskey="s">Update</button>
+                <button class="button is-large is-primary" id="update" accesskey="s">
+                    <span class="icon is-medium">
+                        <i class="fas fa-bolt"></i>
+                    </span>
+                    <span>Update</span>
+                </button>
             </div>
             <div class="control">
-                <button class="button is-info" id="switchSides">Switch Sides</button>
+                <button class="button is-info" id="switchSides">
+                    <span class="icon is-medium">
+                        <i class="fas fa-exchange-alt"></i>
+                    </span>
+                    <span>Switch Sides</span>
+                </button>
             </div>
             <div class="control">
-                <button class="button is-danger" id="resetScores">Reset Scores</button>
+                <button class="button is-danger" id="resetScores">
+                    <span class="icon is-medium">
+                        <i class="fas fa-angle-double-left"></i>
+                    </span>
+                    <span>Reset Scores</span>
+                </button>
             </div>
             <div class="control">
-                <button class="button" id="undoChanges">Undo Changes</button>
+                <button class="button" id="swapPlayerPositions">
+                    <span class="icon is-medium">
+                        <i class="fas fa-sync"></i>
+                    </span>
+                    <span>Swap Player Positions</span>
+                </button>
+            </div>
+            <div class="control">
+                <button class="button" id="undoChanges">
+                    <span class="icon is-medium">
+                        <i class="fas fa-undo"></i>
+                    </span>
+                    <span>Undo Changes</span>
+                </button>
             </div>
         </div>
     </form>
