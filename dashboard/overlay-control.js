@@ -7,10 +7,6 @@
 			displayString: "Acme Consulting"
 		},
 		{
-			searchString: "Acme Consulting",
-			displayString: "Acme Consulting"
-		},
-		{
 			searchString: "AgInfusion",
 			displayString: "AgInfusion"
 		},
