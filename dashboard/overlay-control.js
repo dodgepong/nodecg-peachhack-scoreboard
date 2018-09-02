@@ -151,6 +151,10 @@
 			displayString: "Skorpios Defense Systems"
 		},
 		{
+			searchString: "SSO Industries",
+			displayString: "SSO Industries"
+		},
+		{
 			searchString: "Spark Agency",
 			displayString: "Spark Agency"
 		},
@@ -460,9 +464,9 @@
 		return now.hour(endHour).minute(endMinute).second(endSecond);
 	}
 
-	function add65Min() {
+	function addMin(minutes) {
 		var now = moment();
-		now.add(65, 'minutes');
+		now.add(minutes, 'minutes');
 		setEndTime(now);
 	}
 
@@ -493,6 +497,7 @@
 	const b_rightScorePlus = document.getElementById('rightScorePlus');
 
 	const b_add65Min = document.getElementById('add65Min');
+	const b_add40Min = document.getElementById('add40Min');
 	const b_clearTime = document.getElementById('clearTime');
 
 	nodecg.readReplicant('scoreboard', scoreboard => {
@@ -615,7 +620,11 @@
 	});
 
 	b_add65Min.addEventListener('click', () => {
-		add65Min();
+		addMin(65);
+	});
+
+	b_add40Min.addEventListener('click', () => {
+		addMin(40);
 	});
 
 	b_clearTime.addEventListener('click', () => {
