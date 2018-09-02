@@ -143,12 +143,20 @@
 			displayString: "Pālanā Foods"
 		},
 		{
+			searchString: "Saraswati Mnemonics",
+			displayString: "Saraswati Mnemonics"
+		},
+		{
 			searchString: "Seidr Laboratories",
 			displayString: "Seidr Laboratories"
 		},
 		{
 			searchString: "Skorpios Defense Systems",
 			displayString: "Skorpios Defense Systems"
+		},
+		{
+			searchString: "Sportsmetal",
+			displayString: "Sportsmetal"
 		},
 		{
 			searchString: "SSO Industries",
@@ -298,6 +306,10 @@
 			displayString: 'Laramy Fisk'
 		},
 		{
+			searchString: 'Liza Talking Thunder',
+			displayString: 'Liza Talking Thunder'
+		},
+		{
 			searchString: 'Leela Patel',
 			displayString: 'Leela Patel'
 		},
@@ -407,6 +419,35 @@
 		}
 	}
 
+	function setTeamsEnabled(teamsEnabled) {
+		const i_teamsEnabled = document.getElementById('teamsEnabled');
+		const leftTeamNameContainer = document.getElementById('leftTeamNameContainer');
+		const rightTeamNameContainer = document.getElementById('rightTeamNameContainer');
+		const b_teams = document.getElementById('toggleTeams');
+
+		i_teamsEnabled.value = teamsEnabled;
+
+		if (teamsEnabled) {
+			b_teams.classList.add('is-link');
+			leftTeamNameContainer.style.display = 'block';
+			rightTeamNameContainer.style.display = 'block';
+		} else {
+			b_teams.classList.remove('is-link');
+			leftTeamNameContainer.style.display = 'none';
+			rightTeamNameContainer.style.display = 'none';
+		}
+	}
+
+	function toggleTeamsEnabled() {
+		const i_teamsEnabled = document.getElementById('teamsEnabled');
+
+		if (i_teamsEnabled.value === '1' || i_teamsEnabled.value === 'true') {
+			setTeamsEnabled(0);
+		} else {
+			setTeamsEnabled(1);
+		}
+	}
+
 	function resetScores() {
 		const i_leftPlayerScore = document.getElementById('leftPlayerScore');
 		const i_rightPlayerScore = document.getElementById('rightPlayerScore');
@@ -477,10 +518,12 @@
 	const b_undoChanges = document.getElementById('undoChanges');
 
 	const i_leftPlayerName = document.getElementById('leftPlayerName');
+	const i_leftTeamName = document.getElementById('leftTeamName');
 	const i_leftPlayerRunner = document.getElementById('leftPlayerRunner');
 	const i_leftPlayerCorp = document.getElementById('leftPlayerCorp');
 	const i_leftPlayerScore = document.getElementById('leftPlayerScore');
 	const i_rightPlayerName = document.getElementById('rightPlayerName');
+	const i_rightTeamName = document.getElementById('rightTeamName');
 	const i_rightPlayerRunner = document.getElementById('rightPlayerRunner');
 	const i_rightPlayerCorp = document.getElementById('rightPlayerCorp');
 	const i_rightPlayerScore = document.getElementById('rightPlayerScore');
@@ -491,6 +534,9 @@
 	const b_leftPlayerTakeCorp = document.getElementById('leftPlayerTakeCorp');
 	const b_leftPlayerTakeRunner = document.getElementById('leftPlayerTakeRunner');
 
+	const i_teamsEnabled = document.getElementById('teamsEnabled');
+	const b_toggleTeams = document.getElementById('toggleTeams');
+
 	const b_leftScoreMinus = document.getElementById('leftScoreMinus');
 	const b_leftScorePlus = document.getElementById('leftScorePlus');
 	const b_rightScoreMinus = document.getElementById('rightScoreMinus');
@@ -498,14 +544,17 @@
 
 	const b_add65Min = document.getElementById('add65Min');
 	const b_add40Min = document.getElementById('add40Min');
+	const b_add60Min = document.getElementById('add60Min');
 	const b_clearTime = document.getElementById('clearTime');
 
 	nodecg.readReplicant('scoreboard', scoreboard => {
 		i_leftPlayerName.value = scoreboard.leftPlayer.name;
+		i_leftTeamName.value = scoreboard.leftPlayer.team;
 		i_leftPlayerRunner.value = scoreboard.leftPlayer.runner;
 		i_leftPlayerCorp.value = scoreboard.leftPlayer.corp;
 		i_leftPlayerScore.value = scoreboard.leftPlayer.score;
 		i_rightPlayerName.value = scoreboard.rightPlayer.name;
+		i_rightTeamName.value = scoreboard.rightPlayer.team;
 		i_rightPlayerRunner.value = scoreboard.rightPlayer.runner;
 		i_rightPlayerCorp.value = scoreboard.rightPlayer.corp;
 		i_rightPlayerScore.value = scoreboard.rightPlayer.score;
@@ -515,15 +564,18 @@
 		i_roundTitle.value = scoreboard.round.title;
 
 		setLeftPlayerRunning(scoreboard.leftPlayerRunning);
+		setTeamsEnabled(scoreboard.teamsEnabled);
 	});
 
 	b_update.addEventListener('click', () => {
 		nodecg.readReplicant('scoreboard', scoreboard => {
 			scoreboard.leftPlayer.name = i_leftPlayerName.value;
+			scoreboard.leftPlayer.team = i_leftTeamName.value;
 			scoreboard.leftPlayer.runner = i_leftPlayerRunner.value;
 			scoreboard.leftPlayer.corp = i_leftPlayerCorp.value;
 			scoreboard.leftPlayer.score = i_leftPlayerScore.value;
 			scoreboard.rightPlayer.name = i_rightPlayerName.value;
+			scoreboard.rightPlayer.team = i_rightTeamName.value;
 			scoreboard.rightPlayer.runner = i_rightPlayerRunner.value;
 			scoreboard.rightPlayer.corp = i_rightPlayerCorp.value;
 			scoreboard.rightPlayer.score = i_rightPlayerScore.value;
@@ -531,6 +583,7 @@
 			scoreboard.round.title = i_roundTitle.value;
 
 			scoreboard.leftPlayerRunning = i_leftPlayerRunning.value === "1";
+			scoreboard.teamsEnabled = i_teamsEnabled.value === "1";
 
 			const endTime = getEndTime();
 			if (endTime) {
@@ -564,6 +617,10 @@
 		i_rightPlayerScore.value = tempLeftScore;
 
 		toggleLeftPlayerRunning();
+	});
+
+	b_toggleTeams.addEventListener('click', () => {
+		toggleTeamsEnabled();
 	});
 
 	b_resetScores.addEventListener('click', () => {
@@ -625,6 +682,10 @@
 
 	b_add40Min.addEventListener('click', () => {
 		addMin(40);
+	});
+
+	b_add60Min.addEventListener('click', () => {
+		addMin(60);
 	});
 
 	b_clearTime.addEventListener('click', () => {

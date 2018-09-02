@@ -14,7 +14,7 @@
         }
 
         .time {
-            width: 50px;
+            width: 40px;
         }
 
 
@@ -52,6 +52,11 @@
                 <div class="field">
                     <div class="control">
                         <input class="input" tabindex="1" type="text" id="leftPlayerName" placeholder="Left Player Name" />
+                    </div>
+                </div>
+                <div id="leftTeamNameContainer" class="field">
+                    <div class="control">
+                        <input class="input" tabindex="1" type="text" id="leftTeamName" placeholder="Left Team Name" />
                     </div>
                 </div>
                 <div class="field has-addons">
@@ -112,6 +117,11 @@
                         <input class="input" tabindex="4" type="text" id="rightPlayerName" placeholder="Right Player Name" />
                     </div>
                 </div>
+                <div id="rightTeamNameContainer" class="field">
+                    <div class="control">
+                        <input class="input" tabindex="4" type="text" id="rightTeamName" placeholder="Right Team Name" />
+                    </div>
+                </div>
                 <div class="field">
                     <div class="control">
                         <input class="input is-info" tabindex="5" type="text" id="rightPlayerCorp" placeholder="Right Player Corp" />
@@ -161,12 +171,16 @@
                         <button class="button is-success" id="add40Min">40</button>
                     </div>
                     <div class="control">
+                        <button class="button is-success" id="add60Min">60</button>
+                    </div>
+                    <div class="control">
                         <button class="button is-info" id="clearTime">Clear</button>
                     </div>
                 </div>
             </div>
         </div>
         <input type="hidden" id="leftPlayerRunning" />
+        <input type="hidden" id="teamsEnabled" />
         <div class="field is-grouped">
             <div class="control">
                 <button class="button is-large is-primary" id="update" accesskey="s">
@@ -189,7 +203,7 @@
                     <span class="icon is-medium">
                         <i class="fas fa-angle-double-left"></i>
                     </span>
-                    <span>Reset Scores</span>
+                    <span>Reset Score</span>
                 </button>
             </div>
             <div class="control">
@@ -197,7 +211,7 @@
                     <span class="icon is-medium">
                         <i class="fas fa-sync"></i>
                     </span>
-                    <span>Swap Player Positions</span>
+                    <span>Swap Seats</span>
                 </button>
             </div>
             <div class="control">
@@ -205,7 +219,15 @@
                     <span class="icon is-medium">
                         <i class="fas fa-undo"></i>
                     </span>
-                    <span>Undo Changes</span>
+                    <span>Undo</span>
+                </button>
+            </div>
+            <div class="control">
+                <button class="button" id="toggleTeams">
+                    <span class="icon is-medium">
+                        <i class="fas fa-users"></i>
+                    </span>
+                    <span>Teams</span>
                 </button>
             </div>
         </div>

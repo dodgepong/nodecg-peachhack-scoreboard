@@ -3,10 +3,12 @@
 
     var endTime = null;
 
+    const o_leftTeamName = document.getElementById('leftTeamName');
     const o_leftPlayerName = document.getElementById('leftPlayerName');
     const o_leftPlayerID = document.getElementById('leftPlayerID');
     const o_leftPlayerScore = document.getElementById('leftPlayerScore');
 
+    const o_rightTeamName = document.getElementById('rightTeamName');
     const o_rightPlayerName = document.getElementById('rightPlayerName');
     const o_rightPlayerID = document.getElementById('rightPlayerID');
     const o_rightPlayerScore = document.getElementById('rightPlayerScore');
@@ -49,6 +51,10 @@
         o_rightPlayerName.innerHTML = newScore.rightPlayer.name;
         o_leftPlayerScore.innerHTML = newScore.leftPlayer.score;
         o_rightPlayerScore.innerHTML = newScore.rightPlayer.score;
+        if (o_leftTeamName && o_rightTeamName) {
+            o_leftTeamName.innerHTML = newScore.leftPlayer.team;
+            o_rightTeamName.innerHTML = newScore.rightPlayer.team;
+        }
 
         if (newScore.leftPlayerRunning) {
             o_leftPlayerID.innerHTML = newScore.leftPlayer.runner;
