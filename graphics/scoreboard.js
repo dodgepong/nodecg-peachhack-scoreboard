@@ -4,11 +4,15 @@
     var endTime = null;
 
     const o_leftTeamName = document.getElementById('leftTeamName');
+    const o_leftFlagImage = document.getElementById('leftFlagImage');
+    const o_leftFlagContainer = document.getElementById('leftFlagContainer');
     const o_leftPlayerName = document.getElementById('leftPlayerName');
     const o_leftPlayerID = document.getElementById('leftPlayerID');
     const o_leftPlayerScore = document.getElementById('leftPlayerScore');
 
     const o_rightTeamName = document.getElementById('rightTeamName');
+    const o_rightFlagImage = document.getElementById('rightFlagImage');
+    const o_rightFlagContainer = document.getElementById('rightFlagContainer');
     const o_rightPlayerName = document.getElementById('rightPlayerName');
     const o_rightPlayerID = document.getElementById('rightPlayerID');
     const o_rightPlayerScore = document.getElementById('rightPlayerScore');
@@ -54,6 +58,20 @@
         if (o_leftTeamName && o_rightTeamName) {
             o_leftTeamName.innerHTML = newScore.leftPlayer.team;
             o_rightTeamName.innerHTML = newScore.rightPlayer.team;
+        }
+
+        if (newScore.leftPlayer.country && newScore.leftPlayer.country !== "") {
+            o_leftFlagImage.src = "../shared/flags/" + newScore.leftPlayer.country + ".png";
+            o_leftFlagContainer.style.display = "block";
+        } else {
+            o_leftFlagContainer.style.display = "none";
+        }
+
+        if (newScore.rightPlayer.country && newScore.rightPlayer.country !== "") {
+            o_rightFlagImage.src = "../shared/flags/" + newScore.rightPlayer.country + ".png";
+            o_rightFlagContainer.style.display = "block";
+        } else {
+            o_rightFlagContainer.style.display = "none";
         }
 
         if (newScore.leftPlayerRunning) {

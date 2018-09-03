@@ -391,6 +391,8 @@
 		}
 	];
 
+	const countries = ["Abkhazia", "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "andorra", "Angola", "Anguilla", "Antigua And Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Azores Islands", "Bahamas", "Bahrain", "Balearic Islands", "Bangladesh", "Barbados", "Basque Country", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bonaire", "Bosnia And Herzegovina", "Botswana", "Brazil", "British Columbia", "British Indian Ocean Territory", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Canary Islands", "Cape Verde", "Cayman Islands", "Central African Republic", "Ceuta", "Chad", "Chile", "China", "Christmas Island", "Cocos Island", "Colombia", "Comoros", "Cook Islands", "Corsica", "Costa Rica", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Democratic Republic Of Congo", "Denmark", "Djibouti", "Dominican Republic", "Dominica", "East Timor", "Ecuador", "Egypt", "El Salvador", "England", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "European Union", "Falkland Islands", "Faroe Islands", "Fiji", "Files.txt", "Finland", "flagnames.py", "flags.json", "France", "French Polynesia", "Gabon", "Galapagos Islands", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea Bissau", "Guinea", "Haiti", "Hawaii", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle Of Man", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jersey", "Jordan", "jsonformatter.txt", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Madeira", "Malasya", "Malawi", "Maldives", "Mali", "Malta", "Marshall Island", "Martinique", "Mauritania", "Mauritius", "Melilla", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nato", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Nigeria", "Niger", "Niue", "Norfolk Island", "Northern Cyprus", "Northern Marianas Islands", "North Korea", "Norway", "Oman", "Ossetia", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn Islands", "Poland", "Portugal", "Puerto Rico", "Rapa Nui", "Republic Of Macedonia", "Republic Of The Congo", "Romania", "Russia", "Rwanda", "Saba Island", "Sahrawi Arab Democratic Republic", "Saint Kitts And Nevis", "Samoa", "San Marino", "Sao Tome And Prince", "Sardinia", "Saudi Arabia", "Scotland", "Senegal", "Serbia", "Seychelles", "Sicily", "Sierra Leone", "Singapore", "Sint Eustatius", "Sint Maarten", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Barts", "St Lucia", "St Vincent And The Grenadines", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Tibet", "Togo", "Tokelau", "Tonga", "Transnistria", "Trinidad And Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks And Caicos", "Tuvalu 1", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United Nations", "United States", "Uruguay", "Uzbekistn", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands", "Wales", "Yemen", "Zambia", "Zimbabwe"]
+
 	function searchCorps(query, cb) {
 		var matches = corps.filter(corp => corp.searchString.match(new RegExp(query, "i")));
 		cb(matches);
@@ -398,6 +400,11 @@
 
 	function searchRunners(query, cb) {
 		var matches = runners.filter(runner => runner.searchString.match(new RegExp(query, "i")));
+		cb(matches);
+	}
+
+	function searchCountries(query, cb) {
+		var matches = countries.filter(country => country.match(new RegExp(query, "i")));
 		cb(matches);
 	}
 
@@ -517,11 +524,14 @@
 	const b_resetScores = document.getElementById('resetScores');
 	const b_undoChanges = document.getElementById('undoChanges');
 
+	const i_leftPlayerCountry = document.getElementById('leftPlayerCountry');
 	const i_leftPlayerName = document.getElementById('leftPlayerName');
 	const i_leftTeamName = document.getElementById('leftTeamName');
 	const i_leftPlayerRunner = document.getElementById('leftPlayerRunner');
 	const i_leftPlayerCorp = document.getElementById('leftPlayerCorp');
 	const i_leftPlayerScore = document.getElementById('leftPlayerScore');
+
+	const i_rightPlayerCountry = document.getElementById('rightPlayerCountry');
 	const i_rightPlayerName = document.getElementById('rightPlayerName');
 	const i_rightTeamName = document.getElementById('rightTeamName');
 	const i_rightPlayerRunner = document.getElementById('rightPlayerRunner');
@@ -548,11 +558,13 @@
 	const b_clearTime = document.getElementById('clearTime');
 
 	nodecg.readReplicant('scoreboard', scoreboard => {
+		i_leftPlayerCountry.value = scoreboard.leftPlayer.country;
 		i_leftPlayerName.value = scoreboard.leftPlayer.name;
 		i_leftTeamName.value = scoreboard.leftPlayer.team;
 		i_leftPlayerRunner.value = scoreboard.leftPlayer.runner;
 		i_leftPlayerCorp.value = scoreboard.leftPlayer.corp;
 		i_leftPlayerScore.value = scoreboard.leftPlayer.score;
+		i_rightPlayerCountry.value = scoreboard.rightPlayer.country;
 		i_rightPlayerName.value = scoreboard.rightPlayer.name;
 		i_rightTeamName.value = scoreboard.rightPlayer.team;
 		i_rightPlayerRunner.value = scoreboard.rightPlayer.runner;
@@ -569,11 +581,13 @@
 
 	b_update.addEventListener('click', () => {
 		nodecg.readReplicant('scoreboard', scoreboard => {
+			scoreboard.leftPlayer.country = i_leftPlayerCountry.value;
 			scoreboard.leftPlayer.name = i_leftPlayerName.value;
 			scoreboard.leftPlayer.team = i_leftTeamName.value;
 			scoreboard.leftPlayer.runner = i_leftPlayerRunner.value;
 			scoreboard.leftPlayer.corp = i_leftPlayerCorp.value;
 			scoreboard.leftPlayer.score = i_leftPlayerScore.value;
+			scoreboard.rightPlayer.country = i_rightPlayerCountry.value;
 			scoreboard.rightPlayer.name = i_rightPlayerName.value;
 			scoreboard.rightPlayer.team = i_rightTeamName.value;
 			scoreboard.rightPlayer.runner = i_rightPlayerRunner.value;
@@ -601,17 +615,23 @@
 	});
 
 	b_swapPlayerPositions.addEventListener('click', () => {
+		var tempLeftCountry = i_leftPlayerCountry.value;
 		var tempLeftName = i_leftPlayerName.value;
+		var tempLeftTeam = i_leftTeamName.value;
 		var tempLeftRunner = i_leftPlayerRunner.value;
 		var tempLeftCorp = i_leftPlayerCorp.value;
 		var tempLeftScore = i_leftPlayerScore.value;
 
+		i_leftPlayerCountry.value = i_rightPlayerCountry.value;
 		i_leftPlayerName.value = i_rightPlayerName.value;
+		i_leftTeamName.value = i_rightTeamName.value;
 		i_leftPlayerRunner.value = i_rightPlayerRunner.value;
 		i_leftPlayerCorp.value = i_rightPlayerCorp.value;
 		i_leftPlayerScore.value = i_rightPlayerScore.value;
 
+		i_rightPlayerCountry.value = tempLeftCountry;
 		i_rightPlayerName.value = tempLeftName;
+		i_rightTeamName.value = tempLeftTeam;
 		i_rightPlayerRunner.value = tempLeftRunner;
 		i_rightPlayerCorp.value = tempLeftCorp;
 		i_rightPlayerScore.value = tempLeftScore;
@@ -629,10 +649,15 @@
 
 	b_undoChanges.addEventListener('click', () => {
 		nodecg.readReplicant('scoreboard', scoreboard => {
+			i_leftPlayerCountry.value = scoreboard.leftPlayer.country;
 			i_leftPlayerName.value = scoreboard.leftPlayer.name;
+			i_leftTeamName.value = scoreboard.leftPlayer.team;
 			i_leftPlayerRunner.value = scoreboard.leftPlayer.runner;
 			i_leftPlayerCorp.value = scoreboard.leftPlayer.corp;
 			i_leftPlayerScore.value = scoreboard.leftPlayer.score;
+			i_rightPlayerCountry.value = scoreboard.rightPlayer.country;
+			i_rightPlayerName.value = scoreboard.rightPlayer.name;
+			i_rightTeamName.value = scoreboard.rightPlayer.team;
 			i_rightPlayerName.value = scoreboard.rightPlayer.name;
 			i_rightPlayerRunner.value = scoreboard.rightPlayer.runner;
 			i_rightPlayerCorp.value = scoreboard.rightPlayer.corp;
@@ -691,6 +716,20 @@
 	b_clearTime.addEventListener('click', () => {
 		setEndTime("");
 	});
+
+	autocomplete('#leftPlayerCountry', { hint: false, autoselect: true, appendTo: '#leftPlayerCountryAutocomplete' }, [
+		{
+			source: searchCountries,
+			displayKey: function(match) { return match; }
+		}
+	]);
+
+	autocomplete('#rightPlayerCountry', { hint: false, autoselect: true, appendTo: '#rightPlayerCountryAutocomplete' }, [
+		{
+			source: searchCountries,
+			displayKey: function(match) { return match; }
+		}
+	]);
 
 	autocomplete('#leftPlayerRunner', { hint: false, autoselect: true, appendTo: '#leftPlayerRunnerAutocomplete' }, [
 		{

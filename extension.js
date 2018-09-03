@@ -7,14 +7,16 @@ module.exports = function (nodecg) {
             runner: "",
             corp: "",
             score: 0,
-            team: ""
+            team: "",
+            country: ""
         },
         rightPlayer: {
             name: "",
             runner: "",
             corp: "",
             score: 0,
-            team: ""
+            team: "",
+            country: ""
         },
         leftPlayerRunning: true,
         round: {

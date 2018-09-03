@@ -17,6 +17,10 @@
             width: 40px;
         }
 
+        .country {
+            width: 120px;
+        }
+
 
         .algolia-autocomplete {
             width: 100%;
@@ -49,8 +53,12 @@
     <form onsubmit="return false;">
         <div class="columns">
             <div class="column">
-                <div class="field">
+                <div class="field has-addons">
                     <div class="control">
+                        <input class="input country" tabindex="1" type="text" id="leftPlayerCountry" placeholder="Country" />
+                        <div id="leftPlayerCountryAutocomplete" ></div>
+                    </div>
+                    <div class="control is-expanded">
                         <input class="input" tabindex="1" type="text" id="leftPlayerName" placeholder="Left Player Name" />
                     </div>
                 </div>
@@ -112,8 +120,12 @@
                 </div>
             </div>
             <div class="column">
-                <div class="field">
+                <div class="field has-addons">
                     <div class="control">
+                        <input class="input country" tabindex="4" type="text" id="rightPlayerCountry" placeholder="Country" />
+                        <div id="rightPlayerCountryAutocomplete" ></div>
+                    </div>
+                    <div class="control is-expanded">
                         <input class="input" tabindex="4" type="text" id="rightPlayerName" placeholder="Right Player Name" />
                     </div>
                 </div>

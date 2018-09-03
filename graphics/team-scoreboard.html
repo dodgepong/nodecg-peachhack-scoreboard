@@ -19,12 +19,20 @@
             clip-path: polygon(0 0, 32.8125% 0, 34.375% 20%, 65.625% 20%, 67.1875% 0, 100% 0, 100% 100%, 0 100%);
         }
 
-        .player-box {
+        .team-player-box {
             width: 660px;
             height: 100%;
             margin: 0;
             flex-grow: 1;
             flex-direction: column;
+        }
+
+        .player-box {
+            width: 660px;
+            height: 120px;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
         }
 
         .score-box {
@@ -51,6 +59,34 @@
             margin-top: 30px;
             flex-grow: 1;
             flex-direction: column;
+        }
+
+        .player-name-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flag-container {
+            width: 80px;
+            margin-top: 34px;
+            margin-bottom: 0px;
+        }
+
+        .flag-container-left {
+            margin-left: 10px;
+            margin-right: 0px;
+        }
+
+        .flag-container-right {
+            margin-left: 0px;
+            margin-right: 10px;
+        }
+
+        .flag-image {
+            width: 80px;
+            height: 53px;
+            margin: 0;
         }
 
         .player-name {
@@ -129,10 +165,17 @@
 </head>
 <body>
     <div id="scoreboard">
-        <div class="player-box">
+        <div class="team-player-box">
             <div id="leftTeamName" class="team-name"></div>
-            <div id="leftPlayerName" class="player-name"></div>
-            <div id="leftPlayerID" class="player-identity"></div>
+            <div class="player-box">
+                <div id="leftFlagContainer" class="flag-container flag-container-left">
+                    <img id="leftFlagImage" class="flag-image" src="" />
+                </div>
+                <div class="player-name-container">
+                    <div id="leftPlayerName" class="player-name"></div>
+                    <div id="leftPlayerID" class="player-identity"></div>
+                </div>
+            </div>
         </div>
         <div id="leftPlayerScore" class="score-box"></div>
         <div class="round-box">
@@ -140,10 +183,17 @@
             <div id="roundTitle" class="round-title"></div>
         </div>
         <div id="rightPlayerScore" class="score-box"></div>
-        <div class="player-box">
+        <div class="team-player-box">
             <div id="rightTeamName" class="team-name"></div>
-            <div id="rightPlayerName" class="player-name"></div>
-            <div id="rightPlayerID" class="player-identity"></div>
+            <div class="player-box">
+                <div class="player-name-container">
+                    <div id="rightPlayerName" class="player-name"></div>
+                    <div id="rightPlayerID" class="player-identity"></div>
+                </div>
+                <div id="rightFlagContainer" class="flag-container flag-container-right">
+                    <img id="rightFlagImage" class="flag-image" src="" />
+                </div>
+            </div>
         </div>
     </div>
     <script src="../node_modules/moment/moment.js"></script>
